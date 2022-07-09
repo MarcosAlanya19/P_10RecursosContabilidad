@@ -11,6 +11,6 @@ export const cargarAportesComisiones = (selectAfp: HTMLInputElement) => {
     selectAfp.innerHTML = templateHtml;
 }
 
-export const showAndHideTable = (tablePlanilla: HTMLTableElement) => {
+export const showAndHideTable = (tablePlanilla: HTMLElement) => {
     tablePlanilla.classList.toggle("d-none");
 }
