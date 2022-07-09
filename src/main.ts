@@ -6,7 +6,7 @@ const sueldo=document.getElementById('exampleInputEmail1') as HTMLInputElement; 
 const afp=document.getElementById('disabledSelect') as HTMLInputElement; // selectAfp
 const afpContent= afp.value;
 const addTodo=document.getElementById('add-todo') as HTMLFormElement;//Formulario
-const sueldoBruto=document.getElementById('sueldo-bruto') as HTMLTableElement;//tablaSueldo
+
 
 // OPERACIONES
 const aporteObligatorio=(sueldo:number)=>sueldo*0.10;
@@ -26,7 +26,7 @@ addTodo.addEventListener('click',e=>{
   e.preventDefault();
   const sueldoValue=Number(sueldo.value);
   const result = document.getElementById('sueldo-bruto') as HTMLInputElement; ;
-  result.innerText= `${sueldoValue}`;
+  result.innerText= `${sueldoValue.toFixed(2)}`;
 })// sueldoBruto
 
 addTodo.addEventListener('click',e=>{
@@ -34,7 +34,7 @@ addTodo.addEventListener('click',e=>{
   const sueldoValue=Number(sueldo.value);
   const calculaAporte =aporteObligatorio(sueldoValue);
   const result = document.getElementById('aporte-obligatorio') as HTMLInputElement;
-  result.innerText= `${calculaAporte}`;
+  result.innerText= `${calculaAporte.toFixed(2)}`;
 }) // aporteObligatorio
 
 addTodo.addEventListener('click',e=>{
@@ -42,7 +42,7 @@ addTodo.addEventListener('click',e=>{
   const sueldoValue=Number(sueldo.value);
   const calculaPrima =primaSeguro(sueldoValue);
   const result = document.getElementById('prima-seguro') as HTMLInputElement;
-  result.innerText= `${calculaPrima}`;
+  result.innerText= `${calculaPrima.toFixed(2)}`;
 }) // primaSeguro
 
 addTodo.addEventListener('click',e=>{
@@ -50,7 +50,7 @@ addTodo.addEventListener('click',e=>{
   const sueldoValue=Number(sueldo.value);
   const calculaComision =comisionAFP(sueldoValue,afpContent);
   const result = document.getElementById('comision-afp') as HTMLInputElement;
-  result.innerText= `${calculaComision}`;
+  result.innerText= `${calculaComision.toFixed(2)}`;
 }) // comisionAfp
 
 addTodo.addEventListener('click',e=>{
@@ -61,5 +61,5 @@ addTodo.addEventListener('click',e=>{
   const calculaComision =comisionAFP(sueldoValue,afpContent);
   const calculaNeto =sueldoNeto(sueldoValue,calculaAporte,calculaPrima,calculaComision);
   const result = document.getElementById('sueldo-neto') as HTMLInputElement;
-  result.innerText= `${calculaNeto}`;
+  result.innerText= `${calculaNeto.toFixed(2)}`;
 }) // sueldoNeto
