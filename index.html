@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="pt-5 text-center">PLANILLA BASICA</h1>
+      <form id="form">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Ingrese sueldo bruto</label>
+          <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Seleccione AFP</label>
+          <select id="disabledSelect" class="form-select">
+            <option> </option>
+            <option value="HABITAD">HABITAD</option>
+            <option>INTEGRA</option>
+            <option>PRIMA</option>
+            <option>PROFUTURO</option>
+          </select>
+        </div>
+        <button id="add-todo" type="submit" class="btn btn-primary">Generar resultado</button>
+      </form>
+      <table id="table" class="table table-bordered border-primary text-center mt-3">
+        <tr>
+          <td>Sueldo bruto</td>
+          <td>AFP</td>
+          <td>Aporte obligatorio</td>
+          <td>Prima de seguro</td>
+          <td>Comision AFP</td>
+          <td>Sueldo NETO</td>
+        </tr>
+        <tr>
+          <td id="sueldo-bruto"></td>
+          <td id="select-afp"></td>
+          <td id="aporte-obligatorio"></td>
+          <td id="prima-seguro"></td>
+          <td id="comision-afp"></td>
+          <td id="sueldo-neto"></td>
+        </tr>
+      </table>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
