@@ -17,10 +17,10 @@ if (!tablePlanilla) throw new Error("No se encontro el tablePlanilla")
 cargarAportesComisiones(selectAfp);
 
 // OPERACIONES
-const aporteObligatorio = (sueldo: number) => sueldo * 0.10;
-const primaSeguro = (sueldo: number) => sueldo * 0.0174;
-const comisionAFP = (sueldo: number, comision: number) => sueldo * comision;
-const sueldoNeto = (sueldo: number, aporte: number, prima: number, comision: number) => sueldo - aporte - prima - comision;
+// const aporteObligatorio = (sueldo: number) => sueldo * 0.10;
+// const primaSeguro = (sueldo: number) => sueldo * 0.0174;
+// const comisionAFP = (sueldo: number, comision: number) => sueldo * comision;
+// const sueldoNeto = (sueldo: number, aporte: number, prima: number, comision: number) => sueldo - aporte - prima - comision;
 
 
 // TABLAS
