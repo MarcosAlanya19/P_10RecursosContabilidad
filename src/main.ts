@@ -1,65 +1,49 @@
-import './style.css'
-import './bootstrap.css'
+import './styles/style.css'
+import './styles/bootstrap.css'
+import { cargarAportesComisiones, showAndHideTable } from './utils';
+import { aportesComisiones } from './data';
+
+
+// var dt = require('datatables.net')();
 
 // DOM
-const sueldo=document.getElementById('exampleInputEmail1') as HTMLInputElement; //ingreseSueldoBruto
-const afp=document.getElementById('disabledSelect') as HTMLInputElement; // selectAfp
-const afpContent= afp.value;
-const addTodo=document.getElementById('add-todo') as HTMLFormElement;//Formulario
+const sueldo = document.querySelector<HTMLInputElement>('#exampleInputEmail1');
+if (!sueldo) throw new Error("No se encontro el inputEmail1")
+//ingreseSueldoBruto
+const selectAfp = document.querySelector<HTMLInputElement>('#selectAporteComision'); // selectAfp
+if (!selectAfp) throw new Error("No se encontro el afpInput")
 
+const formPlanillaBasica = document.querySelector<HTMLFormElement>('#formPlanillaBasica');
+if (!formPlanillaBasica) throw new Error("No se encontro el formPlanillaBasica")
+const tablePlanilla = document.querySelector<HTMLTableElement>('#tablePlanilla');
+if (!tablePlanilla) throw new Error("No se encontro el tablePlanilla")
+
+const tableDiv = document.querySelector<HTMLElement>('#tableDiv');
+if (!tableDiv) throw new Error("No se encontro el tableDiv")
+cargarAportesComisiones(selectAfp);
 
 // OPERACIONES
-const aporteObligatorio=(sueldo:number)=>sueldo*0.10;
-const primaSeguro=(sueldo:number)=>sueldo*0.0174;
-const comisionAFP=(sueldo:number,comision:any)=>sueldo*comision;
-const sueldoNeto=(sueldo:number,aporte:number,prima:number,comision:number)=>sueldo-aporte-prima-comision;
-
-switch(afpContent){
-  case 'HABITAD': 0.023 ;break ;
-  case 'INTEGRA': 0.0;break ;
-  case 'PRIMA': 0.018;break ;
-  case 'PROFUTURO': 0.067;break ;
-}
-
+const aporteObligatorio = (sueldo: number) => sueldo * 0.10;
+const primaSeguro = (sueldo: number) => sueldo * 0.0174;
+const comisionAFP = (sueldo: number, comision: number) => sueldo * comision;
+const sueldoNeto = (sueldo: number, aporte: number, prima: number, comision: number) => sueldo - aporte - prima - comision;
 // TABLAS
-addTodo.addEventListener('click',e=>{
-  e.preventDefault();
-  const sueldoValue=Number(sueldo.value);
-  const result = document.getElementById('sueldo-bruto') as HTMLInputElement; ;
-  result.innerText= `${sueldoValue.toFixed(2)}`;
+// $(document).ready(function () {
+// });
+
+formPlanillaBasica.addEventListener('submit', e => {
+  e.preventDefault()
+  const idAporteComision = selectAfp.value;
+  const findAporteComision = aportesComisiones.find(a => a.id === parseInt(idAporteComision))
+  if (!findAporteComision) throw new Error("No se encontro el aporte Comision")
+  showAndHideTable(tableDiv);
+
+  // ($('#tablePlanilla') as any).DataTable({
+  //   dom: 'Bfrtip',
+  //   buttons: [
+  //     'copy', 'csv', 'excel', 'pdf', 'print'
+  //   ]
+  // });
 })// sueldoBruto
 
-addTodo.addEventListener('click',e=>{
-  e.preventDefault();
-  const sueldoValue=Number(sueldo.value);
-  const calculaAporte =aporteObligatorio(sueldoValue);
-  const result = document.getElementById('aporte-obligatorio') as HTMLInputElement;
-  result.innerText= `${calculaAporte.toFixed(2)}`;
-}) // aporteObligatorio
 
-addTodo.addEventListener('click',e=>{
-  e.preventDefault();
-  const sueldoValue=Number(sueldo.value);
-  const calculaPrima =primaSeguro(sueldoValue);
-  const result = document.getElementById('prima-seguro') as HTMLInputElement;
-  result.innerText= `${calculaPrima.toFixed(2)}`;
-}) // primaSeguro
-
-addTodo.addEventListener('click',e=>{
-  e.preventDefault();
-  const sueldoValue=Number(sueldo.value);
-  const calculaComision =comisionAFP(sueldoValue,afpContent);
-  const result = document.getElementById('comision-afp') as HTMLInputElement;
-  result.innerText= `${calculaComision.toFixed(2)}`;
-}) // comisionAfp
-
-addTodo.addEventListener('click',e=>{
-  e.preventDefault();
-  const sueldoValue=Number(sueldo.value);
-  const calculaAporte =aporteObligatorio(sueldoValue);
-  const calculaPrima =primaSeguro(sueldoValue);
-  const calculaComision =comisionAFP(sueldoValue,afpContent);
-  const calculaNeto =sueldoNeto(sueldoValue,calculaAporte,calculaPrima,calculaComision);
-  const result = document.getElementById('sueldo-neto') as HTMLInputElement;
-  result.innerText= `${calculaNeto.toFixed(2)}`;
-}) // sueldoNeto
