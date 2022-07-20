@@ -22,18 +22,20 @@
   <div class="container">
     <h1 class="pt-5 text-center">PLANILLA BASICA</h1>
     <form id="formPlanillaBasica">
+
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Ingrese sueldo bruto</label>
         <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" min="1" required>
       </div>
+
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Seleccione AFP</label>
-        <select id="selectAporteComision" class="form-select">
+        <select id="selectAporteComision" class="form-select" required>
         </select>
       </div>
-      <button type="submit" class="btn btn-primary">Generar resultado</button>
+      <button type="submit" class="btn btn-primary">Mostrar tabla</button>
     </form>
-    <div id="tableDiv" class="d-none">
+    <div id="tableDiv">
       <table id="tablePlanilla" class="table table-bordered border-primary text-center mt-3 table table-striped table-bordered">
         <thead>
           <tr>
