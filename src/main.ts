@@ -29,9 +29,10 @@ const sueldoNeto = (sueldo: number, aporte: number, prima: number, comision: num
 // Aparcion y desaparicion de tablas
 formPlanillaBasica.addEventListener('submit', e => {
   e.preventDefault()
-  
-  // info de la tabla
+  // Agregar tabla
   infotable();
+  // Quitar tabla
+  
   // showAndHideTable(tableDiv);
 })
 
@@ -44,42 +45,46 @@ function infotable(){
 
   if (!sueldo) throw new Error("No se encontro el inputEmail1")
   const ingresoBruto = parseInt(sueldo.value);
-  // const sueldoBruto= document.querySelector<HTMLTableElement>('#sueldo-bruto')!;
+
+  const resultAporte=aporteObligatorio(ingresoBruto,findAporteComision.aporteObligatorio);
+
+  const resultSeguro=primaSeguro(ingresoBruto,findAporteComision.primaSeguro);
+
+  const resultComision=comisionAFP(ingresoBruto,findAporteComision.comision);
   
-
-  // const nameAfp= document.querySelector<HTMLTableElement>('#select-afp')!;
-    // nameAfp.innerText=`${findAporteComision.name}`;
-
-  const resultAporte=aporteObligatorio(ingresoBruto,findAporteComision.aporteObligatorio).toFixed(2);
-  // const aporteAfp= document.querySelector<HTMLTableElement>('#aporte-obligatorio')!;
-  // aporteAfp.innerText=`${resultAporte.toFixed(2)}`;
-
-  const resultSeguro=primaSeguro(ingresoBruto,findAporteComision.primaSeguro).toFixed(2);
-  // const seguroAfp= document.querySelector<HTMLTableElement>('#prima-seguro')!;
-    // seguroAfp.innerText=`${resultSeguro.toFixed(2)}`;
-
-  const resultComision=comisionAFP(ingresoBruto,findAporteComision.comision).toFixed(2);
-  // const comisionAfp= document.querySelector<HTMLTableElement>('#comision-afp')!;
-    // comisionAfp.innerText=`${resultComision.toFixed(2)}`;
-    
-
   const resultNeto=sueldoNeto(ingresoBruto,resultAporte,resultSeguro,resultComision).toFixed(2);
-  // const netoPlanilla= document.querySelector<HTMLTableElement>('#sueldo-neto')!;
-    // netoPlanilla.innerText=`${resultNeto.toFixed(2)}`;
+  
 
   // Generar HTML
     const row = document.createElement('tbody');
         row.innerHTML = `
-        <tr>
-            <td id="sueldo-bruto">${ingresoBruto}</td>
-            <td id="select-afp">${findAporteComision.name}</td>
-            <td id="aporte-obligatorio">${resultAporte}</td>
-            <td id="prima-seguro">${resultSeguro}</td>
-            <td id="comision-afp">${resultComision}</td>
-            <td id="sueldo-neto">${resultNeto}</td>
+        <tr >
+            <td>${ingresoBruto}</td>
+            <td>${findAporteComision.name}</td>
+            <td>${resultAporte}</td>
+            <td>${resultSeguro}</td>
+            <td>${resultComision}</td>
+            <td>${resultNeto}</td>
+            <td>
+            <a id="result" href="#" class="borrar-curso"> X </a>
+            </td>
         </tr>
         `;
         // Se agrega al tbody
   tablePlanilla?.appendChild(row);
 }
+const result = document.querySelector<HTMLLinkElement>('#result')!;
+result.addEventListener('click' , e => {
+      //Elimina del arreglo por el data-id
+      limpiarHTML();
+      // articulosCarrito = articulosCarrito.filter( curso=> curso.id !== cursoId)
+      // carritoHTML();
+  }
+)
 
+function limpiarHTML(){
+  // contenedorCarrito.innerHTML = '';
+  while(tablePlanilla?.firstChild){
+    tablePlanilla.removeChild(tablePlanilla.firstChild);
+  }
+}
